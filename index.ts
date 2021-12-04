@@ -1,3 +1,4 @@
-function preload() {
-    console.log("Hello World!");
+function startup() {
+    edom.init();
+    createUI();
 }
