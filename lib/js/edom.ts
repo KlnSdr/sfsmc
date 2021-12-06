@@ -61,6 +61,8 @@ class edom {
                 return new edomListElement(false, tagname);
             case 'img':
                 return new edomImageElement(false, tagname);
+            case 'label':
+                return new edomLabelElement(false, tagname);
             default:
                 return new edomElement(false, tagname);
         }
@@ -124,6 +126,14 @@ class edom {
                 if (template[i].src != undefined) {
                     (currentChild as edomImageElement).setSrc(template[i].src);
                 }
+                if (template[i].for != undefined) {
+                    (currentChild as edomLabelElement).setFor(template[i].for);
+                }
+                if (template[i].groupID != undefined) {
+                    (currentChild as edomInputElement).setGroup(
+                        template[i].groupID
+                    );
+                }
                 if (template[i].target != undefined) {
                     (currentChild as edomAnchorElement).href(
                         template[i].target
@@ -166,6 +176,7 @@ class edomElement {
 
     set id(id: string) {
         this._id = id;
+        this.element.id = id;
     }
 
     private handlers: handlerObject = {};
@@ -322,6 +333,7 @@ class edomElement {
 class edomInputElement extends edomElement {
     value: string = '';
     type: string = 'text';
+    groupID: string = '';
 
     addChange(identifier: string, func: (self: this) => any) {
         this.addEvent('input', identifier, (self) => {
@@ -345,6 +357,11 @@ class edomInputElement extends edomElement {
 
     select() {
         (this.element as HTMLInputElement).select();
+    }
+
+    setGroup(_groupID: string) {
+        this.groupID = _groupID;
+        (this.element as HTMLInputElement).name = this.groupID;
     }
 }
 
@@ -406,5 +423,13 @@ class edomImageElement extends edomElement {
     setSrc(src: string) {
         this.src = src;
         (this.element as HTMLImageElement).src = this.src;
+    }
+}
+// edomLabelElement ==================================================================================
+class edomLabelElement extends edomElement {
+    for: string = '';
+    setFor(htmlFor: string) {
+        this.for = htmlFor;
+        (this.element as HTMLLabelElement).htmlFor = this.for;
     }
 }

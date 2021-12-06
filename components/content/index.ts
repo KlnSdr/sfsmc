@@ -4,6 +4,7 @@ class Content {
             children: [
                 {
                     tag: 'div',
+                    id: 'content',
                     classes: ['content'],
                 },
             ],
@@ -11,6 +12,24 @@ class Content {
     }
 
     static switchContext(targetName: string) {
-        console.log(targetName);
+        edom.findById('content')?.clear();
+        Dropdown.removeDropdowns();
+
+        switch (targetName) {
+            case 'add':
+                edom.fromTemplate(
+                    Dropdown.instruction('launch vehicle', [
+                        'Jupiter I',
+                        'Jupiter II',
+                        'Jupiter III',
+                        'Jupiter IV',
+                        'Seth',
+                    ]),
+                    edom.findById('content')
+                );
+                break;
+            default:
+                break;
+        }
     }
 }
