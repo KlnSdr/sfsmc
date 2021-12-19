@@ -1,0 +1,35 @@
+.textInput {
+    margin: 5px 5px;
+    margin-left: 10px;
+    margin-right: 4px;
+    padding: 0px;
+}
+
+.textInput input {
+    background-color: var(--lighter);
+    margin-left: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    height: 20px;
+    color: var(--font);
+    border: var(--lighter) 2px solid;
+    width: calc(75% - 32px);
+    display: inline-block;
+}
+
+.textInput input:focus {
+    border: var(--accent) 2px solid;
+}
+
+.textInput label {
+    display: inline-block;
+}
+
+.textInput i {
+    margin: 0px;
+    font-size: larger;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}

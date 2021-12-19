@@ -6,6 +6,7 @@ class Content {
         vehicles: 'launch vehicles',
         stats: 'statistics',
     };
+
     static render() {
         edom.fromTemplate({
             children: [
@@ -16,7 +17,7 @@ class Content {
                         {
                             tag: 'h2',
                             id: 'headline',
-                            text: 'missions',
+                            text: '',
                         },
                     ],
                 },
@@ -37,16 +38,7 @@ class Content {
             case 'missions':
                 break;
             case 'add':
-                edom.fromTemplate(
-                    Dropdown.instruction('launch vehicle', [
-                        'Jupiter I',
-                        'Jupiter II',
-                        'Jupiter III',
-                        'Jupiter IV',
-                        'Seth',
-                    ]),
-                    edom.findById('content')
-                );
+                AddMission.render();
                 break;
             default:
                 break;

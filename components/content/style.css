@@ -1,6 +1,14 @@
 .content {
+    margin-bottom: 80px;
+    padding-top: 36px;
 }
 
 h2 {
     text-align: center;
+    position: fixed;
+    top: 0;
+    display: inline-block;
+    width: 100%;
+    background-color: var(--background);
+    box-shadow: 0 0 5px 2px var(--background);
 }

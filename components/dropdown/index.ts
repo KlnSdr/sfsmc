@@ -63,52 +63,50 @@ class DropdownCode {
         //         >
         //     </div>
         // </div>
-        return [
-            {
-                tag: 'div',
-                classes: ['dropdown'],
-                children: [
-                    {
-                        tag: 'div',
-                        classes: ['dropdownHead'],
-                        handler: [
-                            {
-                                type: 'click',
-                                id: 'clickHandlerOpenCloseDropdown',
-                                arguments: '',
-                                body: `Dropdown.getThis('${this.headline}').switchState()`,
-                            },
-                        ],
-                        children: [
-                            {
-                                tag: 'i',
-                                id: `${this.headline}StateSymbol`,
-                                classes: ['fas', 'fa-caret-right'],
-                            },
-                            {
-                                tag: 'p',
-                                text: this.headline,
-                            },
-                            {
-                                tag: 'label',
-                                id: `${this.headline}LabelValue`,
-                                text: `${
-                                    this.value > -1
-                                        ? ' - ' + this.options[this.value]
-                                        : ''
-                                }`,
-                            },
-                        ],
-                    },
-                    {
-                        tag: 'div',
-                        id: `${this.headline}dropdownContent`,
-                        classes: ['dropdownContent'],
-                        children: this.createInputs(),
-                    },
-                ],
-            },
-        ];
+        return {
+            tag: 'div',
+            classes: ['dropdown'],
+            children: [
+                {
+                    tag: 'div',
+                    classes: ['dropdownHead'],
+                    handler: [
+                        {
+                            type: 'click',
+                            id: 'clickHandlerOpenCloseDropdown',
+                            arguments: '',
+                            body: `Dropdown.getThis('${this.headline}').switchState()`,
+                        },
+                    ],
+                    children: [
+                        {
+                            tag: 'i',
+                            id: `${this.headline}StateSymbol`,
+                            classes: ['fas', 'fa-caret-right'],
+                        },
+                        {
+                            tag: 'p',
+                            text: this.headline,
+                        },
+                        {
+                            tag: 'label',
+                            id: `${this.headline}LabelValue`,
+                            text: `${
+                                this.value > -1
+                                    ? ' - ' + this.options[this.value]
+                                    : ''
+                            }`,
+                        },
+                    ],
+                },
+                {
+                    tag: 'div',
+                    id: `${this.headline}dropdownContent`,
+                    classes: ['dropdownContent'],
+                    children: this.createInputs(),
+                },
+            ],
+        };
     }
 
     private createInputs(): edomObj {
