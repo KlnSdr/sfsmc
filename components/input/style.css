@@ -1,21 +1,20 @@
 .textInput {
     margin: 5px 5px;
-    margin-left: 10px;
+    margin-left: 5px;
     margin-right: 4px;
     padding: 0px;
 }
 
 .textInput input {
     background-color: var(--lighter);
-    margin-left: 5px;
+    margin-top: 5px;
     border-radius: 5px;
     padding: 5px;
     border: none;
     height: 20px;
     color: var(--font);
     border: var(--lighter) 2px solid;
-    width: calc(75% - 32px);
-    display: inline-block;
+    width: calc(100% - 15px);
 }
 
 .textInput input:focus {
@@ -23,7 +22,7 @@
 }
 
 .textInput label {
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .textInput i {
@@ -32,4 +31,11 @@
     width: 20px;
     height: 20px;
     text-align: center;
+}
+
+.textInput p {
+    padding: 0px;
+    margin: 0px;
+    width: 10px;
+    display: inline-block;
 }

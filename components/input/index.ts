@@ -5,12 +5,18 @@ class Input {
             classes: ['textInput'],
             children: [
                 {
+                    tag: 'p',
+                },
+                {
                     tag: 'i',
                     classes: ['fas', 'fa-pen'],
                 },
                 {
                     tag: 'label',
                     text: text,
+                },
+                {
+                    tag: 'br',
                 },
                 {
                     tag: 'input',
