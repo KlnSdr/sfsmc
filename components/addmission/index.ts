@@ -40,6 +40,17 @@ class AddMission {
                 ]),
                 Input.instruction('apogee (km):', 'txtApogee', 'number'),
                 Input.instruction('perigee (km):', 'txtPerigee', 'number'),
+                {
+                    tag: 'button',
+                    children: [
+                        {
+                            tag: 'i',
+                            classes: ['fas', 'fa-save'],
+                        },
+                    ],
+                    // text: 'save',
+                    classes: ['saveButton'],
+                },
             ],
             edom.findById('content')
         );

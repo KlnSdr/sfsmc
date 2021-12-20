@@ -1,0 +1,14 @@
+.saveButton {
+    background-color: var(--font);
+    color: var(--lighter);
+    margin: 5px 5px;
+    margin-top: 0px;
+    border-radius: 5px;
+    padding: 0px;
+    border: none;
+    height: 34px;
+    width: 25%;
+
+    position: relative;
+    left: calc(75% - 10px);
+}
