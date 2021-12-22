@@ -63,7 +63,10 @@ class MissionCard {
                                     children: [
                                         {
                                             tag: 'p',
-                                            text: 'a: ' + this.apogee + 'km',
+                                            text:
+                                                'a: ' +
+                                                this.pointify(this.apogee) +
+                                                'km',
                                         },
                                     ],
                                 },
@@ -86,7 +89,10 @@ class MissionCard {
                                     children: [
                                         {
                                             tag: 'p',
-                                            text: 'p: ' + this.perigee + 'km',
+                                            text:
+                                                'p: ' +
+                                                this.pointify(this.perigee) +
+                                                'km',
                                         },
                                     ],
                                 },
@@ -96,6 +102,26 @@ class MissionCard {
                 },
             ],
         };
+    }
+
+    pointify(input: string): string {
+        let output: string = '';
+        const splitted: string[] = input.split('');
+
+        for (let i = splitted.length - 1; i >= 0; i--) {
+            output = splitted[i] + output;
+            if (
+                (splitted.length - i) % 3 === 0 &&
+                splitted.length - i < splitted.length - 1
+            ) {
+                output = ',' + output;
+            }
+            console.log(output);
+            console.log(splitted[i]);
+            console.log('****************************');
+        }
+
+        return output;
     }
 
     createBadge(text: string): edomObj {
