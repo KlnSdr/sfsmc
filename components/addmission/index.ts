@@ -26,6 +26,7 @@ class AddMission {
                 ]),
                 Dropdown.instruction('orbited body', [
                     'none',
+                    'sun',
                     'mercury',
                     'venus',
                     'earth',
@@ -67,8 +68,18 @@ class AddMission {
 
     static saveNewMission() {
         if (AddMission.isDataValid()) {
-            const data: Mission = AddMission.collectData();
-            console.log(data);
+            const missionData: Mission = AddMission.collectData();
+            console.log(missionData);
+
+            const currentData: obj = Datahandler.getData('missions');
+            const newID: string = (
+                parseInt(currentData.currentID) + 1
+            ).toString();
+
+            currentData.currentID = newID;
+            currentData[newID] = missionData;
+
+            Datahandler.saveData('missions', currentData);
         } else {
             alert('data is not complete'); // TODO custom dialog
         }

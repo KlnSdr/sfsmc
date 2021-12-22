@@ -7,7 +7,19 @@ class Datahandler {
         return JSON.parse(localStorage.getItem(key) || '{}');
     }
 
-    static isStorageUsed(): boolean {
+    static isStoreUsed(): boolean {
         return localStorage.length > 0;
+    }
+
+    static initStore() {
+        Datahandler.saveData('vehicles', {
+            currentID: -1,
+        });
+        Datahandler.saveData('missions', {
+            currentID: -1,
+        });
+        Datahandler.saveData('constellations', {
+            currentID: -1,
+        });
     }
 }
