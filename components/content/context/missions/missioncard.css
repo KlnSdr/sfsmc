@@ -1,0 +1,77 @@
+.missionCard {
+    border: var(--lighter) 2px solid;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.missionCard table {
+    width: 100%;
+}
+
+.missionCard table td {
+    width: 50%;
+}
+
+.missionCard h3 {
+    text-decoration: underline;
+}
+
+.missionCard p {
+    font-size: small;
+}
+
+.missionCard .badge {
+    display: inline-block;
+    margin-right: 5px;
+    background-color: var(--lighter);
+    border-radius: 5px;
+
+    padding: 1px;
+}
+
+.missionCard .badge p {
+    display: block;
+    font-size: small;
+}
+
+.missionCard .badge .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    display: inline-block;
+    margin-left: 1px;
+    background-color: grey;
+}
+
+.missionCard .badge .active {
+    background-color: #00d300;
+}
+
+.missionCard .badge .planned {
+    background-color: orange;
+}
+
+.missionCard .badge .destroyed {
+    background-color: red;
+}
+
+.missionCard .badge .deorbited {
+    background-color: lightskyblue;
+}
+
+.missionCard .badge .graveyard {
+    background-color: black;
+}
+
+.missionCard .badge .orbital {
+    background-color: #ff00ea;
+}
+
+.missionCard .badge .suborbital {
+    background-color: #04b488;
+}
+
+.missionCard .badge .blueorigin {
+    background-color: #0000ff;
+}

@@ -22,7 +22,7 @@ class AddMission {
                 ]),
                 Dropdown.instruction('mission type', [
                     'orbital',
-                    Math.random() > 0.9 ? 'blue origin' : 'suborbital',
+                    Math.random() > 0.9 ? 'blueorigin' : 'suborbital',
                 ]),
                 Dropdown.instruction('orbited body', [
                     'none',
@@ -72,14 +72,13 @@ class AddMission {
             console.log(missionData);
 
             const currentData: obj = Datahandler.getData('missions');
-            const newID: string = (
-                parseInt(currentData.currentID) + 1
-            ).toString();
+            const newID: number = currentData.currentID + 1;
 
             currentData.currentID = newID;
             currentData[newID] = missionData;
 
             Datahandler.saveData('missions', currentData);
+            edom.findById('missions')?.doClick();
         } else {
             alert('data is not complete'); // TODO custom dialog
         }

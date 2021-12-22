@@ -36,6 +36,7 @@ class Content {
 
         switch (targetName) {
             case 'missions':
+                Missions.render();
                 break;
             case 'add':
                 AddMission.render();

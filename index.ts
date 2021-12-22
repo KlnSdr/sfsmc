@@ -2,7 +2,7 @@ function startup() {
     edom.init();
     createUI();
     checkStorage();
-    edom.findById('add')?.doClick();
+    edom.findById('missions')?.doClick();
 
     console.log(Datahandler.getData('vehicles'));
     console.log(Datahandler.getData('missions'));
