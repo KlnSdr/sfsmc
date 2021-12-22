@@ -33,7 +33,9 @@ class edom {
         | edomInputElement
         | edomAnchorElement
         | edomListElement
-        | edomImageElement {
+        | edomImageElement
+        | edomLabelElement
+        | edomTAElement {
         switch (tagname.toLowerCase()) {
             case 'input':
                 const elmnt: edomInputElement = new edomInputElement(
@@ -83,7 +85,17 @@ class edom {
         return Array.from(element.children);
     }
 
-    static findById(id: string): edomElement | undefined {
+    static findById(
+        id: string
+    ):
+        | edomElement
+        | edomInputElement
+        | edomAnchorElement
+        | edomListElement
+        | edomImageElement
+        | edomLabelElement
+        | edomTAElement
+        | undefined {
         var toReturn: edomElement | undefined;
         edom.allElements.forEach((element: edomElement) => {
             if (element.id === id) {

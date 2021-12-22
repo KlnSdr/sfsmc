@@ -6,6 +6,7 @@ class AddMission {
                 Input.instruction('acronyms:', 'txtAcronyms'),
                 Dropdown.instruction('launch vehicle', [
                     // todo load from localStorage
+                    'mission specific',
                     'Jupiter I',
                     'Jupiter II',
                     'Jupiter III',
@@ -14,10 +15,10 @@ class AddMission {
                 ]),
                 Dropdown.instruction('mission status', [
                     'active',
+                    'planned',
                     'destroyed',
                     'deorbited',
                     'graveyard',
-                    'planned',
                 ]),
                 Dropdown.instruction('mission type', [
                     'orbital',
@@ -50,9 +51,80 @@ class AddMission {
                     ],
                     // text: 'save',
                     classes: ['saveButton'],
+                    handler: [
+                        {
+                            type: 'click',
+                            arguments: '',
+                            body: 'AddMission.saveNewMission()',
+                            id: 'clickSaveData',
+                        },
+                    ],
                 },
             ],
             edom.findById('content')
         );
+    }
+
+    static saveNewMission() {
+        if (AddMission.isDataValid()) {
+            const data: Mission = AddMission.collectData();
+            console.log(data);
+        } else {
+            alert('data is not complete'); // TODO custom dialog
+        }
+    }
+
+    // TODO make pretty
+    private static isDataValid(): boolean {
+        if (
+            (edom.findById('txtMissionName') as edomInputElement).value.trim()
+                .length === 0 ||
+            Dropdown.getThis('launch vehicle').options[
+                Dropdown.getThis('launch vehicle').value
+            ] === undefined ||
+            Dropdown.getThis('mission status').options[
+                Dropdown.getThis('mission status').value
+            ] === undefined ||
+            Dropdown.getThis('mission type').options[
+                Dropdown.getThis('mission type').value
+            ] === undefined ||
+            Dropdown.getThis('orbited body').options[
+                Dropdown.getThis('orbited body').value
+            ] === undefined ||
+            (edom.findById('txtApogee') as edomInputElement).value.trim()
+                .length === 0 ||
+            (edom.findById('txtPerigee') as edomInputElement).value.trim()
+                .length === 0
+        ) {
+            return false;
+        }
+        return true;
+    }
+
+    private static collectData(): Mission {
+        // TODO type, status to enum or something like that
+        return {
+            name: (edom.findById('txtMissionName') as edomInputElement).value,
+            acronyms: (edom.findById('txtAcronyms') as edomInputElement).value,
+            vehicle:
+                Dropdown.getThis('launch vehicle').options[
+                    Dropdown.getThis('launch vehicle').value
+                ],
+            status: Dropdown.getThis('mission status').options[
+                Dropdown.getThis('mission status').value
+            ].toString(),
+            type: Dropdown.getThis('mission type').options[
+                Dropdown.getThis('mission type').value
+            ].toString(),
+            body: Dropdown.getThis('orbited body').options[
+                Dropdown.getThis('orbited body').value
+            ],
+            apogee: parseInt(
+                (edom.findById('txtApogee') as edomInputElement).value
+            ),
+            perigee: parseInt(
+                (edom.findById('txtPerigee') as edomInputElement).value
+            ),
+        };
     }
 }
