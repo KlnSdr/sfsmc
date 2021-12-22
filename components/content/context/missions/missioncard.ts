@@ -116,9 +116,6 @@ class MissionCard {
             ) {
                 output = ',' + output;
             }
-            console.log(output);
-            console.log(splitted[i]);
-            console.log('****************************');
         }
 
         return output;

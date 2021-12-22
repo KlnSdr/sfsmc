@@ -69,7 +69,6 @@ class AddMission {
     static saveNewMission() {
         if (AddMission.isDataValid()) {
             const missionData: Mission = AddMission.collectData();
-            console.log(missionData);
 
             const currentData: obj = Datahandler.getData('missions');
             const newID: number = currentData.currentID + 1;

@@ -3,10 +3,6 @@ function startup() {
     createUI();
     checkStorage();
     edom.findById('missions')?.doClick();
-
-    console.log(Datahandler.getData('vehicles'));
-    console.log(Datahandler.getData('missions'));
-    console.log(Datahandler.getData('constellations'));
 }
 
 function checkStorage() {
