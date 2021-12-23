@@ -1,0 +1,13 @@
+.detailsButton {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: var(--lighter);
+    color: var(--font);
+    margin: 2.5px;
+    width: calc(50% - 5px);
+}
+
+.delete {
+    background-color: red;
+}

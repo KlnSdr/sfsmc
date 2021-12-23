@@ -21,7 +21,8 @@
     font-size: small;
 }
 
-.missionCard .badge {
+/* TODO put somewhere else*/
+.badge {
     display: inline-block;
     margin-right: 5px;
     background-color: var(--lighter);
@@ -30,12 +31,12 @@
     padding: 1px;
 }
 
-.missionCard .badge p {
+.badge p {
     display: block;
     font-size: small;
 }
 
-.missionCard .badge .circle {
+.badge .circle {
     width: 10px;
     height: 10px;
     border-radius: 100%;
@@ -44,34 +45,34 @@
     background-color: grey;
 }
 
-.missionCard .badge .active {
+.badge .active {
     background-color: #00d300;
 }
 
-.missionCard .badge .planned {
+.badge .planned {
     background-color: orange;
 }
 
-.missionCard .badge .destroyed {
+.badge .destroyed {
     background-color: red;
 }
 
-.missionCard .badge .deorbited {
+.badge .deorbited {
     background-color: lightskyblue;
 }
 
-.missionCard .badge .graveyard {
+.badge .graveyard {
     background-color: black;
 }
 
-.missionCard .badge .orbital {
+.badge .orbital {
     background-color: #ff00ea;
 }
 
-.missionCard .badge .suborbital {
+.badge .suborbital {
     background-color: #04b488;
 }
 
-.missionCard .badge .blueorigin {
+.badge .blueorigin {
     background-color: #0000ff;
 }
