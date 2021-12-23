@@ -70,9 +70,12 @@ class Details {
         modal.element.style.display = 'block';
 
         onShow();
+
+        edom.body.rawElement.style.overflow = 'hidden';
     }
 
     static close() {
         edom.findById('myModal')?.delete();
+        edom.body.rawElement.style.overflow = '';
     }
 }
