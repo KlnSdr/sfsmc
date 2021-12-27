@@ -14,7 +14,7 @@ class Dropdown {
         return this.dropdowns[headline].instruction();
     }
 
-    static getThis(id: string) {
+    static getThis(id: string): DropdownCode {
         return this.dropdowns[id];
     }
 
@@ -139,7 +139,7 @@ class DropdownCode {
         });
     }
 
-    private setValue(newValue: number) {
+    setValue(newValue: number) {
         this.value = newValue;
         edom.findById(`${this.headline}LabelValue`)?.setText(
             ` - ${this.options[this.value]}`

@@ -40,12 +40,24 @@ class Missions {
                     tag: 'button',
                     text: 'edit mission',
                     classes: ['detailsButton'],
+                    handler: [
+                        {
+                            type: 'click',
+                            id: 'clickEditMission',
+                            arguments: '',
+                            body: `Missions.edit(${missionID})`,
+                        },
+                    ],
                 },
             ],
             [
                 {
                     tag: 'ul',
                     children: [
+                        {
+                            tag: 'li',
+                            text: 'acronyms: ' + missionData.acronyms,
+                        },
                         {
                             tag: 'li',
                             text: 'orbited body: ' + missionData.body,
@@ -91,5 +103,92 @@ class Missions {
             Details.close();
             edom.findById('missions')?.doClick();
         }
+    }
+
+    static edit(missionID: number) {
+        // HACK recycle addmission context
+        const missionData: Mission =
+            Datahandler.getData('missions')[missionID.toString()];
+
+        // NOTE i'm tired and sorry
+        // set click for bavbar button add mission to same as before with addition of options parameter in switchContext being set,
+        // click button and set it to initial state
+        edom.findById('add')?.addClick(
+            'clickHandlerSwitchContext',
+            (self: edomElement) => {
+                Navbar.setFocus('add');
+                Content.switchContext('add', {
+                    egg:
+                        missionData.type === 'blueorigin'
+                            ? Egg.forceYes
+                            : missionData.type === 'suborbital'
+                            ? Egg.forceNo
+                            : Egg.dontCare,
+                });
+            }
+        );
+        edom.findById('add')?.doClick();
+        edom.findById('add')?.addClick(
+            'clickHandlerSwitchContext',
+            (self: edomElement) => {
+                Navbar.setFocus('add');
+                Content.switchContext('add');
+            }
+        );
+
+        Details.close();
+
+        (edom.findById('txtMissionName') as edomInputElement).setContent(
+            missionData.name
+        );
+
+        (edom.findById('txtAcronyms') as edomInputElement).setContent(
+            missionData.acronyms
+        );
+
+        edom.findById('headline')?.setText('edit mission');
+
+        // NOTE very ugly ===============================================================
+        (Dropdown.getThis('launch vehicle') as DropdownCode).setValue(
+            (
+                Dropdown.getThis('launch vehicle') as DropdownCode
+            ).options.indexOf(missionData.vehicle)
+        );
+
+        (Dropdown.getThis('mission status') as DropdownCode).setValue(
+            (
+                Dropdown.getThis('mission status') as DropdownCode
+            ).options.indexOf(missionData.status)
+        );
+
+        (Dropdown.getThis('mission type') as DropdownCode).setValue(
+            (Dropdown.getThis('mission type') as DropdownCode).options.indexOf(
+                missionData.type
+            )
+        );
+
+        (Dropdown.getThis('orbited body') as DropdownCode).setValue(
+            (Dropdown.getThis('orbited body') as DropdownCode).options.indexOf(
+                missionData.body
+            )
+        );
+        // NOTE very ugly ===============================================================
+
+        (edom.findById('txtApogee') as edomInputElement).setContent(
+            missionData.apogee.toString()
+        );
+
+        (edom.findById('txtPerigee') as edomInputElement).setContent(
+            missionData.perigee.toString()
+        );
+
+        // overwrite save button handler
+        edom.findById('saveMission')?.deleteClick('clickSaveData');
+        edom.findById('saveMission')?.addClick(
+            'clickSaveData',
+            (self: edomElement) => {
+                AddMission.saveNewMission(true, missionID);
+            }
+        );
     }
 }

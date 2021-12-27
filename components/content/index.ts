@@ -30,7 +30,7 @@ class Content {
         });
     }
 
-    static switchContext(targetName: string) {
+    static switchContext(targetName: string, options: obj = {}) {
         edom.findById('content')?.clear();
         Dropdown.removeDropdowns();
 
@@ -39,7 +39,9 @@ class Content {
                 Missions.render();
                 break;
             case 'add':
-                AddMission.render();
+                AddMission.render(
+                    options.egg !== undefined ? options.egg : Egg.dontCare
+                );
                 break;
             default:
                 break;

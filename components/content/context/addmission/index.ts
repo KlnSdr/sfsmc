@@ -1,5 +1,11 @@
+enum Egg {
+    forceYes,
+    forceNo,
+    dontCare,
+}
+
 class AddMission {
-    static render() {
+    static render(egg: Egg = Egg.dontCare) {
         edom.fromTemplate(
             [
                 Input.instruction('mission name:', 'txtMissionName'),
@@ -22,7 +28,7 @@ class AddMission {
                 ]),
                 Dropdown.instruction('mission type', [
                     'orbital',
-                    Math.random() > 0.9 ? 'blueorigin' : 'suborbital',
+                    this.bunny(egg),
                 ]),
                 Dropdown.instruction('orbited body', [
                     'none',
@@ -50,7 +56,7 @@ class AddMission {
                             classes: ['fas', 'fa-save'],
                         },
                     ],
-                    // text: 'save',
+                    id: "saveMission",
                     classes: ['saveButton'],
                     handler: [
                         {
@@ -66,15 +72,21 @@ class AddMission {
         );
     }
 
-    static saveNewMission() {
+    static saveNewMission(isEdited: boolean = false, _missionID: number = 0) {
         if (AddMission.isDataValid()) {
             const missionData: Mission = AddMission.collectData();
 
             const currentData: obj = Datahandler.getData('missions');
-            const newID: number = currentData.currentID + 1;
 
-            currentData.currentID = newID;
-            currentData[newID] = missionData;
+            let missionID: number;
+            if (!isEdited) {
+                missionID = currentData.currentID + 1;
+                currentData.currentID = missionID;
+            } else {
+                missionID = _missionID;
+            }
+
+            currentData[missionID] = missionData;
 
             Datahandler.saveData('missions', currentData);
             edom.findById('missions')?.doClick();
@@ -110,8 +122,8 @@ class AddMission {
         return true;
     }
 
-    private static collectData(): Mission {
-        // TODO type, status to enum or something like that
+    static collectData(): Mission {
+        // TODO type & status to enum or something like that
         return {
             name: (edom.findById('txtMissionName') as edomInputElement).value,
             acronyms: (edom.findById('txtAcronyms') as edomInputElement).value,
@@ -135,5 +147,17 @@ class AddMission {
                 (edom.findById('txtPerigee') as edomInputElement).value
             ),
         };
+    }
+
+    private static bunny(egg: Egg): string {
+        switch (egg) {
+            case Egg.forceYes:
+                return 'blueorigin';
+                break;
+            case Egg.forceNo:
+                return 'suborbital';
+            case Egg.dontCare:
+                return Math.random() > 0.9 ? 'blueorigin' : 'suborbital';
+        }
     }
 }
