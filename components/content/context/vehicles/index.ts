@@ -1,16 +1,16 @@
-class Missions {
+class Vehicles {
     static render() {
-        edom.fromTemplate(Missions.generateCards(), edom.findById('content'));
+        edom.fromTemplate(Vehicles.generateCards(), edom.findById('content'));
     }
 
     private static generateCards(): obj[] {
-        const missions: obj = Datahandler.getData('missions');
+        const vehicles: obj = Datahandler.getData('vehicles');
         let cards: obj[] = [];
 
-        for (let i = missions.currentID; i >= 0; i--) {
-            if (missions[i.toString()].type !== '[removed]') {
+        for (let i = vehicles.currentID; i >= 0; i--) {
+            if (vehicles[i.toString()].type !== '[removed]') {
                 cards.push(
-                    new MissionCard(missions[i.toString()], i).instruction()
+                    new VehicleCard(vehicles[i.toString()], i).instruction()
                 );
             }
         }
@@ -18,34 +18,34 @@ class Missions {
         return cards;
     }
 
-    static openDetails(missionID: number) {
-        const missionData: Mission = Datahandler.getData('missions')[missionID];
+    static openDetails(vehicleID: number) {
+        const vehicleData: Vehicle = Datahandler.getData('vehicles')[vehicleID];
         Details.show(
-            missionData.name,
+            vehicleData.name,
             [
                 {
                     tag: 'button',
-                    text: 'delete mission',
+                    text: 'delete vehicle',
                     classes: ['detailsButton', 'delete'],
                     handler: [
                         {
                             type: 'click',
                             id: 'clickDeleteMission',
                             arguments: '',
-                            body: `Missions.delete(${missionID})`,
+                            body: `Vehicles.delete(${vehicleID})`,
                         },
                     ],
                 },
                 {
                     tag: 'button',
-                    text: 'edit mission',
+                    text: 'edit vehicle',
                     classes: ['detailsButton'],
                     handler: [
                         {
                             type: 'click',
                             id: 'clickEditMission',
                             arguments: '',
-                            body: `Missions.edit(${missionID})`,
+                            body: `Vehicles.edit(${vehicleID})`,
                         },
                     ],
                 },
@@ -56,37 +56,20 @@ class Missions {
                     children: [
                         {
                             tag: 'li',
-                            text: 'acronyms: ' + missionData.acronyms,
-                        },
-                        {
-                            tag: 'li',
-                            text: 'orbited body: ' + missionData.body,
-                        },
-                        {
-                            tag: 'li',
-                            text: 'launch vehicle: ' + missionData.vehicle,
-                        },
-                        {
-                            tag: 'li',
-                            text: 'status: ' + missionData.status,
-                        },
-                        {
-                            tag: 'li',
-                            text: 'type: ' + missionData.type,
+                            text: 'stages: ' + vehicleData.stages,
                         },
                         {
                             tag: 'li',
                             text:
-                                'apogee: ' +
-                                pointify(missionData.apogee.toString()) +
-                                'km',
+                                'reusable: ' +
+                                (vehicleData.isReusable ? 'yes' : 'no'),
                         },
                         {
                             tag: 'li',
                             text:
-                                'perigee: ' +
-                                pointify(missionData.perigee.toString()) +
-                                'km',
+                                'thrust at liftoff: ' +
+                                pointify(vehicleData.tal.toString()) +
+                                't',
                         },
                     ],
                 },
@@ -94,21 +77,24 @@ class Missions {
         );
     }
 
-    static delete(missionID: number) {
-        if (confirm('are you sure you want to delete this mission?')) {
-            const missionsData: obj = Datahandler.getData('missions');
-            missionsData[missionID.toString()] = { type: '[removed]' };
+    static delete(vehicleID: number) {
+        if (confirm('are you sure you want to delete this vehicle?')) {
+            const vehicleData: obj = Datahandler.getData('vehicles');
+            vehicleData[vehicleID.toString()] = { type: '[removed]' };
 
-            Datahandler.saveData('missions', missionsData);
+            Datahandler.saveData('vehicles', vehicleData);
             Details.close();
-            edom.findById('missions')?.doClick();
+            edom.findById('vehicles')?.doClick();
         }
     }
 
-    static edit(missionID: number) {
+    static edit(vehicleID: number) {
+        Details.close();
+        return;
+
         // HACK recycle addmission context
         const missionData: Mission =
-            Datahandler.getData('missions')[missionID.toString()];
+            Datahandler.getData('missions')[vehicleID.toString()];
 
         // NOTE i'm tired and sorry
         // set click for bavbar button add mission to same as before with addition of options parameter in switchContext being set,
@@ -116,6 +102,7 @@ class Missions {
         edom.findById('add')?.addClick(
             'clickHandlerSwitchContext',
             (self: edomElement) => {
+                // TODO change for vehicles if needed
                 Navbar.setFocus('add');
                 Content.switchContext('add', {
                     egg:
@@ -186,7 +173,7 @@ class Missions {
         edom.findById('saveMission')?.addClick(
             'clickSaveData',
             (self: edomElement) => {
-                AddMission.saveNewMission(true, missionID);
+                AddMission.saveNewMission(true, vehicleID);
             }
         );
     }

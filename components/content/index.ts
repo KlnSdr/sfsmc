@@ -2,8 +2,9 @@ class Content {
     private static headlines: { [key: string]: string } = {
         missions: 'missions',
         constellations: 'constellations',
-        add: 'add mission',
+        addMission: 'add mission',
         vehicles: 'launch vehicles',
+        addVehicle: 'add launch vehicle',
         stats: 'statistics',
     };
 
@@ -38,7 +39,7 @@ class Content {
             case 'missions':
                 Missions.render();
                 break;
-            case 'add':
+            case 'addMission':
                 AddMission.render(
                     options.egg !== undefined ? options.egg : Egg.dontCare
                 );
@@ -46,8 +47,14 @@ class Content {
             case 'constellations':
                 Constellations.render();
                 break;
-            case "stats":
+            case 'stats':
                 Statistics.render();
+                break;
+            case 'vehicles':
+                Vehicles.render();
+                break;
+            case 'addVehicle':
+                AddVehicle.render();
                 break;
             default:
                 break;

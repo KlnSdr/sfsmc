@@ -8,6 +8,13 @@ interface Mission {
     apogee: number;
     perigee: number;
 }
+
+interface Vehicle {
+    name: string;
+    isReusable: boolean,
+    tal: number,
+    stages: number
+}
 interface obj extends Object {
     [key: string]: any;
 }
