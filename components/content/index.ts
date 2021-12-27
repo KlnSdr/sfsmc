@@ -43,6 +43,12 @@ class Content {
                     options.egg !== undefined ? options.egg : Egg.dontCare
                 );
                 break;
+            case 'constellations':
+                Constellations.render();
+                break;
+            case "stats":
+                Statistics.render();
+                break;
             default:
                 break;
         }
