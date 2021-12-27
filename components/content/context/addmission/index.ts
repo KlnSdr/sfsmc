@@ -10,15 +10,10 @@ class AddMission {
             [
                 Input.instruction('mission name:', 'txtMissionName'),
                 Input.instruction('acronyms:', 'txtAcronyms'),
-                Dropdown.instruction('launch vehicle', [
-                    // todo load from localStorage
-                    'mission specific',
-                    'Jupiter I',
-                    'Jupiter II',
-                    'Jupiter III',
-                    'Jupiter IV',
-                    'Seth',
-                ]),
+                Dropdown.instruction(
+                    'launch vehicle',
+                    AddMission.loadLaunchVehicles()
+                ),
                 Dropdown.instruction('mission status', [
                     'active',
                     'planned',
@@ -56,7 +51,7 @@ class AddMission {
                             classes: ['fas', 'fa-save'],
                         },
                     ],
-                    id: "saveMission",
+                    id: 'saveMission',
                     classes: ['saveButton'],
                     handler: [
                         {
@@ -159,5 +154,18 @@ class AddMission {
             case Egg.dontCare:
                 return Math.random() > 0.9 ? 'blueorigin' : 'suborbital';
         }
+    }
+
+    private static loadLaunchVehicles(): string[] {
+        const vehicles: obj = Datahandler.getData('vehicles');
+        let output: string[] = ['mission specific'];
+
+        for (let i = 0; i <= vehicles.currentID; i++) {
+            if (vehicles[i.toString()].type !== '[removed]') {
+                output.push(vehicles[i].name);
+            }
+        }
+
+        return output;
     }
 }
