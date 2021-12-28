@@ -125,7 +125,7 @@ class Missions {
             'clickHandlerSwitchContext',
             (self: edomElement) => {
                 Navbar.setFocus('add');
-                Content.switchContext('add', {
+                Content.switchContext('addMission', {
                     egg:
                         missionData.type === 'blueorigin'
                             ? Egg.forceYes
