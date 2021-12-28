@@ -8,7 +8,7 @@ class Settings {
                 children: [
                     {
                         tag: 'img',
-                        src: '/favicon.svg',
+                        src: './favicon.svg',
                     },
                     {
                         tag: 'table',
@@ -153,5 +153,5 @@ class Settings {
         });
     }
 }
-Settings.versionNumber = '1.1.2';
+Settings.versionNumber = '1.1.3';
 Settings.rlab = 'i just wanne test';
