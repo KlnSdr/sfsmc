@@ -89,12 +89,9 @@ class Vehicles {
     }
 
     static edit(vehicleID: number) {
-        Details.close();
-        return;
-
         // HACK recycle addmission context
-        const missionData: Mission =
-            Datahandler.getData('missions')[vehicleID.toString()];
+        const vehicleData: Vehicle =
+            Datahandler.getData('vehicles')[vehicleID.toString()];
 
         // NOTE i'm tired and sorry
         // set click for bavbar button add mission to same as before with addition of options parameter in switchContext being set,
@@ -102,16 +99,8 @@ class Vehicles {
         edom.findById('add')?.addClick(
             'clickHandlerSwitchContext',
             (self: edomElement) => {
-                // TODO change for vehicles if needed
                 Navbar.setFocus('add');
-                Content.switchContext('add', {
-                    egg:
-                        missionData.type === 'blueorigin'
-                            ? Egg.forceYes
-                            : missionData.type === 'suborbital'
-                            ? Egg.forceNo
-                            : Egg.dontCare,
-                });
+                Content.switchContext('addVehicle');
             }
         );
         edom.findById('add')?.doClick();
@@ -124,56 +113,34 @@ class Vehicles {
 
         Details.close();
 
-        (edom.findById('txtMissionName') as edomInputElement).setContent(
-            missionData.name
-        );
+        edom.findById('headline')?.setText('edit launch vehicle');
 
-        (edom.findById('txtAcronyms') as edomInputElement).setContent(
-            missionData.acronyms
+        (edom.findById('txtVehicleName') as edomInputElement).setContent(
+            vehicleData.name
         );
-
-        edom.findById('headline')?.setText('edit mission');
 
         // NOTE very ugly ===============================================================
-        (Dropdown.getThis('launch vehicle') as DropdownCode).setValue(
-            (
-                Dropdown.getThis('launch vehicle') as DropdownCode
-            ).options.indexOf(missionData.vehicle)
-        );
-
-        (Dropdown.getThis('mission status') as DropdownCode).setValue(
-            (
-                Dropdown.getThis('mission status') as DropdownCode
-            ).options.indexOf(missionData.status)
-        );
-
-        (Dropdown.getThis('mission type') as DropdownCode).setValue(
-            (Dropdown.getThis('mission type') as DropdownCode).options.indexOf(
-                missionData.type
-            )
-        );
-
-        (Dropdown.getThis('orbited body') as DropdownCode).setValue(
-            (Dropdown.getThis('orbited body') as DropdownCode).options.indexOf(
-                missionData.body
+        (Dropdown.getThis('reusable') as DropdownCode).setValue(
+            (Dropdown.getThis('reusable') as DropdownCode).options.indexOf(
+                vehicleData.isReusable ? 'yes' : 'no'
             )
         );
         // NOTE very ugly ===============================================================
 
-        (edom.findById('txtApogee') as edomInputElement).setContent(
-            missionData.apogee.toString()
+        (edom.findById('txtStages') as edomInputElement).setContent(
+            vehicleData.stages.toString()
         );
 
-        (edom.findById('txtPerigee') as edomInputElement).setContent(
-            missionData.perigee.toString()
+        (edom.findById('txtTAL') as edomInputElement).setContent(
+            vehicleData.tal.toString()
         );
 
         // overwrite save button handler
-        edom.findById('saveMission')?.deleteClick('clickSaveData');
-        edom.findById('saveMission')?.addClick(
+        edom.findById('saveVehicle')?.deleteClick('clickSaveData');
+        edom.findById('saveVehicle')?.addClick(
             'clickSaveData',
             (self: edomElement) => {
-                AddMission.saveNewMission(true, vehicleID);
+                AddVehicle.saveNewVehicle(true, vehicleID);
             }
         );
     }
