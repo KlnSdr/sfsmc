@@ -6,6 +6,7 @@ class Content {
         vehicles: 'launch vehicles',
         addVehicle: 'add launch vehicle',
         stats: 'statistics',
+        settings: 'settings',
     };
 
     static render() {
@@ -20,6 +21,18 @@ class Content {
                             id: 'headline',
                             text: '',
                         },
+                        {
+                            tag: 'button',
+                            classes: ['fas', 'fa-ellipsis-h', 'settings'],
+                            handler: [
+                                {
+                                    type: 'click',
+                                    id: 'clickSwitchToSettings',
+                                    arguments: '',
+                                    body: 'Navbar.setFocus("add"); Content.switchContext("settings")',
+                                },
+                            ],
+                        },
                     ],
                 },
                 {
@@ -32,6 +45,14 @@ class Content {
     }
 
     static switchContext(targetName: string, options: obj = {}) {
+        // check if current context is the same as next to save ressources
+        if (
+            edom.findById('headline')?.text === this.headlines[targetName] &&
+            options.forceReload === undefined
+        ) {
+            return;
+        }
+
         edom.findById('content')?.clear();
         Dropdown.removeDropdowns();
 
@@ -55,6 +76,9 @@ class Content {
                 break;
             case 'addVehicle':
                 AddVehicle.render();
+                break;
+            case 'settings':
+                Settings.render();
                 break;
             default:
                 break;

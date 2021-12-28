@@ -84,7 +84,7 @@ class Vehicles {
 
             Datahandler.saveData('vehicles', vehicleData);
             Details.close();
-            edom.findById('vehicles')?.doClick();
+            Content.switchContext('vehicles', { forceReload: true });
         }
     }
 

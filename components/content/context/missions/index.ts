@@ -109,7 +109,7 @@ class Missions {
 
             Datahandler.saveData('missions', missionsData);
             Details.close();
-            edom.findById('missions')?.doClick();
+            Content.switchContext('missions', { forceReload: true });
         }
     }
 
