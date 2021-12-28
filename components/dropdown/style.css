@@ -1,6 +1,6 @@
 .dropdown {
     background-color: var(--lighter);
-    margin: 5px;
+    margin: 5px 5px;
     border-radius: 5px;
     padding: 0px;
 }
@@ -23,7 +23,7 @@
 
 .dropdownHead label {
     display: inline-block;
-    font-size: x-small;
+    font-size: small;
     margin-left: 3px;
 }
 

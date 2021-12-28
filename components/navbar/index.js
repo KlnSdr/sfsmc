@@ -49,7 +49,7 @@ class Navbar {
                                     type: 'click',
                                     id: 'clickHandlerSwitchContext',
                                     arguments: '',
-                                    body: "Navbar.setFocus('add'); Content.switchContext('add')",
+                                    body: 'Navbar.decideWhichAdd();',
                                 },
                             ],
                         },
@@ -95,6 +95,15 @@ class Navbar {
             (_b = edom.findById(targetID)) === null || _b === void 0 ? void 0 : _b.applyStyle('active');
         }
         this.currentFocusedElement = targetID;
+    }
+    static decideWhichAdd() {
+        if (this.currentFocusedElement === 'vehicles') {
+            Content.switchContext('addVehicle');
+        }
+        else {
+            Content.switchContext('addMission');
+        }
+        Navbar.setFocus('add');
     }
 }
 Navbar.currentFocusedElement = 'missions';
