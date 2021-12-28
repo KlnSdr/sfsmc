@@ -91,13 +91,12 @@ class Missions {
         ]);
     }
     static delete(missionID) {
-        var _a;
         if (confirm('are you sure you want to delete this mission?')) {
             const missionsData = Datahandler.getData('missions');
             missionsData[missionID.toString()] = { type: '[removed]' };
             Datahandler.saveData('missions', missionsData);
             Details.close();
-            (_a = edom.findById('missions')) === null || _a === void 0 ? void 0 : _a.doClick();
+            Content.switchContext('missions', { forceReload: true });
         }
     }
     static edit(missionID) {

@@ -66,13 +66,12 @@ class Vehicles {
         ]);
     }
     static delete(vehicleID) {
-        var _a;
         if (confirm('are you sure you want to delete this vehicle?')) {
             const vehicleData = Datahandler.getData('vehicles');
             vehicleData[vehicleID.toString()] = { type: '[removed]' };
             Datahandler.saveData('vehicles', vehicleData);
             Details.close();
-            (_a = edom.findById('vehicles')) === null || _a === void 0 ? void 0 : _a.doClick();
+            Content.switchContext('vehicles', { forceReload: true });
         }
     }
     static edit(vehicleID) {
