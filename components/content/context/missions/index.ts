@@ -65,6 +65,14 @@ class Missions {
                         {
                             tag: 'li',
                             text: 'launch vehicle: ' + missionData.vehicle,
+                            handler: [
+                                {
+                                    type: 'click',
+                                    id: 'clickShowVehicle',
+                                    arguments: '',
+                                    body: `Missions.showLaunchVehicle("${missionData.vehicle}");`,
+                                },
+                            ],
                         },
                         {
                             tag: 'li',
@@ -189,5 +197,24 @@ class Missions {
                 AddMission.saveNewMission(true, missionID);
             }
         );
+    }
+
+    static showLaunchVehicle(vehicleName: string) {
+        if (vehicleName != 'mission specific') {
+            let vehicleID: number = -1;
+
+            const vehicles: obj = Datahandler.getData('vehicles');
+
+            for (let i = 0; i <= vehicles.currentID; i++) {
+                if (vehicles[i].name === vehicleName) {
+                    vehicleID = i;
+                }
+            }
+
+            if (vehicleID > -1) {
+                Details.close();
+                Vehicles.openDetails(vehicleID);
+            }
+        }
     }
 }
