@@ -15,20 +15,14 @@
     border-radius: 5px;
 }
 
-.settingsContainer label {
-    font-size: small;
-    color: var(--accent);
-    width: 100%;
-    display: block;
-    text-align: center;
-}
-
+.settingsContainer label,
 .settingsContainer a {
     font-size: small;
     color: var(--accent);
     width: 100%;
     display: block;
     text-align: center;
+    margin-top: 5px;
 }
 
 .settingsContainer table {

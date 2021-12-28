@@ -1,5 +1,5 @@
 class Settings {
-    static versionNumber: string = '1.1.0';
+    static versionNumber: string = '1.1.1';
     static rlab: string = 'i just wanne test';
 
     static render() {
@@ -14,38 +14,56 @@ class Settings {
                             src: '../../../../favicon.svg',
                         },
                         {
-                            tag: 'button',
-                            text: 'create snapshot',
-                            classes: ['detailsButton', 'settingsButton'],
-                            handler: [
-                                {
-                                    type: 'click',
-                                    id: 'clickCreateSnapshot',
-                                    arguments: '',
-                                    body: 'Settings.createSnapshot();',
-                                },
-                            ],
-                        },
-                        {
-                            tag: 'button',
-                            text: 'clear all data',
-                            classes: [
-                                'detailsButton',
-                                'settingsButton',
-                                'delete',
-                            ],
-                            handler: [
-                                {
-                                    type: 'click',
-                                    id: 'clickDeleteData',
-                                    arguments: '',
-                                    body: 'Settings.resetData();',
-                                },
-                            ],
-                        },
-                        {
                             tag: 'table',
                             children: [
+                                {
+                                    tag: 'tr',
+                                    children: [
+                                        {
+                                            tag: 'td',
+                                            children: [
+                                                {
+                                                    tag: 'button',
+                                                    text: 'create snapshot',
+                                                    classes: [
+                                                        'detailsButton',
+                                                        'settingsButton',
+                                                    ],
+                                                    handler: [
+                                                        {
+                                                            type: 'click',
+                                                            id: 'clickCreateSnapshot',
+                                                            arguments: '',
+                                                            body: 'Settings.createSnapshot();',
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                        {
+                                            tag: 'td',
+                                            children: [
+                                                {
+                                                    tag: 'button',
+                                                    text: 'clear all data',
+                                                    classes: [
+                                                        'detailsButton',
+                                                        'settingsButton',
+                                                        'delete',
+                                                    ],
+                                                    handler: [
+                                                        {
+                                                            type: 'click',
+                                                            id: 'clickDeleteData',
+                                                            arguments: '',
+                                                            body: 'Settings.resetData();',
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
                                 {
                                     tag: 'tr',
                                     children: [
