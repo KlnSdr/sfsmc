@@ -1,5 +1,5 @@
 class Settings {
-    static versionNumber: string = '1.1.1';
+    static versionNumber: string = '1.1.2';
     static rlab: string = 'i just wanne test';
 
     static render() {
@@ -11,7 +11,7 @@ class Settings {
                     children: [
                         {
                             tag: 'img',
-                            src: '../../../../favicon.svg',
+                            src: '/favicon.svg',
                         },
                         {
                             tag: 'table',
