@@ -1,5 +1,5 @@
 class Settings {
-    static versionNumber: string = '1.2.0';
+    static versionNumber: string = '1.2.1';
     static rlab: string = "ain't nothin' but a test";
 
     static render() {

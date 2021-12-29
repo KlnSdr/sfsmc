@@ -161,7 +161,10 @@ class AddMission {
         let output: string[] = ['mission specific'];
 
         for (let i = 0; i <= vehicles.currentID; i++) {
-            if (vehicles[i.toString()].type !== '[removed]') {
+            if (
+                vehicles[i.toString()].type !== '[removed]' &&
+                vehicles[i.toString()].status !== 'retired'
+            ) {
                 output.push(vehicles[i].name);
             }
         }
