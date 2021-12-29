@@ -153,5 +153,5 @@ class Settings {
         });
     }
 }
-Settings.versionNumber = '1.2.0';
+Settings.versionNumber = '1.2.1';
 Settings.rlab = "ain't nothin' but a test";
