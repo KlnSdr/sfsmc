@@ -48,6 +48,10 @@ class Vehicles {
                 children: [
                     {
                         tag: 'li',
+                        text: 'status: ' + vehicleData.status,
+                    },
+                    {
+                        tag: 'li',
                         text: 'stages: ' + vehicleData.stages,
                     },
                     {
@@ -94,6 +98,7 @@ class Vehicles {
         edom.findById('txtVehicleName').setContent(vehicleData.name);
         // NOTE very ugly ===============================================================
         Dropdown.getThis('reusable').setValue(Dropdown.getThis('reusable').options.indexOf(vehicleData.isReusable ? 'yes' : 'no'));
+        Dropdown.getThis('status').setValue(Dropdown.getThis('status').options.indexOf(vehicleData.status));
         // NOTE very ugly ===============================================================
         edom.findById('txtStages').setContent(vehicleData.stages.toString());
         edom.findById('txtTAL').setContent(vehicleData.tal.toString());

@@ -4,6 +4,11 @@ class AddVehicle {
         edom.fromTemplate([
             Input.instruction('vehicle name:', 'txtVehicleName'),
             Dropdown.instruction('reusable', ['yes', 'no']),
+            Dropdown.instruction('status', [
+                'planned',
+                'active',
+                'retired',
+            ]),
             Input.instruction('stages:', 'txtStages', 'number'),
             Input.instruction('thrust at liftoff (t)', 'txtTAL', 'number'),
             {
@@ -53,6 +58,7 @@ class AddVehicle {
         if (edom.findById('txtVehicleName').value.trim()
             .length === 0 ||
             Dropdown.getThis('reusable').options[Dropdown.getThis('reusable').value] === undefined ||
+            Dropdown.getThis('status').options[Dropdown.getThis('status').value] === undefined ||
             edom.findById('txtStages').value.trim()
                 .length === 0 ||
             edom.findById('txtTAL').value.trim()
@@ -68,6 +74,7 @@ class AddVehicle {
             isReusable: Dropdown.getThis('reusable').options[Dropdown.getThis('reusable').value].toString() === 'yes'
                 ? true
                 : false,
+            status: Dropdown.getThis('status').options[Dropdown.getThis('status').value].toString(),
             stages: parseInt(edom.findById('txtStages').value),
             tal: parseInt(edom.findById('txtTAL').value),
         };

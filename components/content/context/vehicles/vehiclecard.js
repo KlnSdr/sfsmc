@@ -5,6 +5,7 @@ class VehicleCard {
         this.isReusable = data.isReusable;
         this.thrustAtLiftoff = data.tal;
         this.stages = data.stages;
+        this.status = data.status;
         this.ID = missionID;
     }
     instruction() {
@@ -39,7 +40,10 @@ class VehicleCard {
                                 {
                                     tag: 'td',
                                     children: [
-                                        this.createBadge(this.isReusable),
+                                        this.createBadge(this.isReusable
+                                            ? 'reusable'
+                                            : 'expendable'),
+                                        this.createBadge(this.status),
                                     ],
                                 },
                             ],
@@ -75,7 +79,7 @@ class VehicleCard {
             ],
         };
     }
-    createBadge(isReusable) {
+    createBadge(text) {
         return {
             tag: 'div',
             classes: ['badge'],
@@ -91,9 +95,7 @@ class VehicleCard {
                                     children: [
                                         {
                                             tag: 'p',
-                                            text: isReusable
-                                                ? 'reusable'
-                                                : 'expendable',
+                                            text: text,
                                         },
                                     ],
                                 },
@@ -102,12 +104,7 @@ class VehicleCard {
                                     children: [
                                         {
                                             tag: 'div',
-                                            classes: [
-                                                'circle',
-                                                isReusable
-                                                    ? 'reusable'
-                                                    : 'expendable',
-                                            ],
+                                            classes: ['circle', text],
                                         },
                                     ],
                                 },
