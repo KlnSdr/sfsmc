@@ -1,6 +1,6 @@
 class Settings {
-    static versionNumber: string = '1.1.3';
-    static rlab: string = 'i just wanne test';
+    static versionNumber: string = '1.2.0';
+    static rlab: string = "ain't nothin' but a test";
 
     static render() {
         edom.fromTemplate(

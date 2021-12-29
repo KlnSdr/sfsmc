@@ -56,6 +56,10 @@ class Vehicles {
                     children: [
                         {
                             tag: 'li',
+                            text: 'status: ' + vehicleData.status,
+                        },
+                        {
+                            tag: 'li',
                             text: 'stages: ' + vehicleData.stages,
                         },
                         {
@@ -123,6 +127,11 @@ class Vehicles {
         (Dropdown.getThis('reusable') as DropdownCode).setValue(
             (Dropdown.getThis('reusable') as DropdownCode).options.indexOf(
                 vehicleData.isReusable ? 'yes' : 'no'
+            )
+        );
+        (Dropdown.getThis('status') as DropdownCode).setValue(
+            (Dropdown.getThis('status') as DropdownCode).options.indexOf(
+                vehicleData.status
             )
         );
         // NOTE very ugly ===============================================================

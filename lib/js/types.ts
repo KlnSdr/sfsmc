@@ -13,7 +13,8 @@ interface Vehicle {
     name: string;
     isReusable: boolean,
     tal: number,
-    stages: number
+    stages: number,
+    status: string
 }
 interface obj extends Object {
     [key: string]: any;

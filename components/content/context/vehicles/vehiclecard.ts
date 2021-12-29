@@ -3,6 +3,7 @@ class VehicleCard {
     isReusable: boolean;
     thrustAtLiftoff: number;
     stages: number;
+    status: string;
 
     ID: number;
 
@@ -11,6 +12,7 @@ class VehicleCard {
         this.isReusable = data.isReusable;
         this.thrustAtLiftoff = data.tal;
         this.stages = data.stages;
+        this.status = data.status;
 
         this.ID = missionID;
     }
@@ -47,7 +49,12 @@ class VehicleCard {
                                 {
                                     tag: 'td',
                                     children: [
-                                        this.createBadge(this.isReusable),
+                                        this.createBadge(
+                                            this.isReusable
+                                                ? 'reusable'
+                                                : 'expendable'
+                                        ),
+                                        this.createBadge(this.status),
                                     ],
                                 },
                             ],
@@ -88,7 +95,7 @@ class VehicleCard {
         };
     }
 
-    createBadge(isReusable: boolean): edomObj {
+    createBadge(text: string): edomObj {
         return {
             tag: 'div',
             classes: ['badge'],
@@ -104,9 +111,7 @@ class VehicleCard {
                                     children: [
                                         {
                                             tag: 'p',
-                                            text: isReusable
-                                                ? 'reusable'
-                                                : 'expendable',
+                                            text: text,
                                         },
                                     ],
                                 },
@@ -115,12 +120,7 @@ class VehicleCard {
                                     children: [
                                         {
                                             tag: 'div',
-                                            classes: [
-                                                'circle',
-                                                isReusable
-                                                    ? 'reusable'
-                                                    : 'expendable',
-                                            ],
+                                            classes: ['circle', text],
                                         },
                                     ],
                                 },
