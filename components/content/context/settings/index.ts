@@ -1,6 +1,36 @@
 class Settings {
-    static versionNumber: string = '1.2.1';
-    static rlab: string = "ain't nothin' but a test";
+    static versionNumbers: string[] = [
+        '0.0.1',
+        '1.0.0',
+        '1.1.1',
+        '1.1.2',
+        '1.1.3',
+        '1.2.0',
+        '1.2.1',
+        '1.3.0',
+    ];
+
+    static rlab: string[] = [
+        'just a test',
+        'still testing',
+        'i just wanna test',
+        'i just wanna test',
+        'i just wanna test',
+        "ain't nothin' but a test",
+        "ain't nothin' but a test",
+        "loggin' on heaven's door",
+    ];
+
+    static changes: string[][] = [
+        ['testing deployment configuration'],
+        ['initial deployment'],
+        ['added settings', 'added "create snapshot"', 'added "clear all data"', 'fixed bugs'],
+        ['fixed bug'],
+        ['actually fixed bug'],
+        ['added development status to vehicles'],
+        ['only active and planned vehicles will be displayed when planning a new mission'],
+        ['added changelog'],
+    ]
 
     static render() {
         edom.fromTemplate(
@@ -72,7 +102,7 @@ class Settings {
                                             children: [
                                                 {
                                                     tag: 'label',
-                                                    text: `v${this.versionNumber} - ${this.rlab}`,
+                                                    text: `v${this.versionNumbers[this.versionNumbers.length - 1]} - ${this.rlab[this.rlab.length - 1]}`,
                                                 },
                                             ],
                                         },
@@ -91,6 +121,26 @@ class Settings {
                             ],
                         },
                     ],
+                },
+                {
+                    tag: 'div',
+                    children: [
+                        {
+                            tag: 'div',
+                            classes: ['settingsContainer'],
+                            children: [
+                                {
+                                    tag: 'p',
+                                    text: 'changelog',
+                                    classes: ['headlineChangelog']
+                                },
+                                {
+                                    tag: 'ul',
+                                    children: this.generateLog()
+                                }
+                            ]
+                        }
+                    ]
                 },
             ],
             edom.findById('content')
@@ -178,5 +228,33 @@ class Settings {
                 self.setText('something is wrong, i can feel it');
             }
         );
+    }
+
+    static generateLog(): edomObj {
+        let changelog: edomObj = [];
+
+        for (let i = this.versionNumbers.length - 1; i >= 0; i--) {
+            changelog.push({
+                tag: 'li',
+                children: [
+                    {
+                        tag: 'p',
+                        text: `v${this.versionNumbers[i]} - ${this.rlab[i]}`
+                    },
+                    {
+                        tag: 'ul',
+                        children: this.changes[i].map((change: string) => {
+                            return {
+                                tag: 'li',
+                                text: change,
+                                classes: ['change']
+                            }
+                        })
+                    }
+                ]
+            });
+        }
+
+        return changelog;
     }
 }
